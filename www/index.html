@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src 'self' *; img-src 'self' data: blob: *; connect-src 'self' *;">
+    <title>Assistant Medical IA</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ===== ECRAN DE CHARGEMENT ===== -->
+    <div id="splash-screen" class="splash-screen">
+        <div class="splash-content">
+            <div class="splash-icon">
+                <svg viewBox="0 0 100 100" width="120" height="120">
+                    <circle cx="50" cy="35" r="18" fill="none" stroke="#fff" stroke-width="3"/>
+                    <path d="M25 70 Q50 90 75 70" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                    <line x1="50" y1="53" x2="50" y2="75" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                    <line x1="50" y1="60" x2="35" y2="70" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                    <line x1="50" y1="60" x2="65" y2="70" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="15" cy="40" r="8" fill="none" stroke="#fff" stroke-width="2" opacity="0.5"/>
+                    <circle cx="85" cy="40" r="8" fill="none" stroke="#fff" stroke-width="2" opacity="0.5"/>
+                </svg>
+            </div>
+            <h1 class="splash-title">Assistant Medical</h1>
+            <p class="splash-subtitle">Intelligence Artificielle & Camera</p>
+            <div class="splash-loader">
+                <div class="loader-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== PAGE D'ACCUEIL ===== -->
+    <div id="page-home" class="page active">
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <svg class="header-logo" viewBox="0 0 40 40" width="36" height="36">
+                        <circle cx="20" cy="14" r="7" fill="none" stroke="#fff" stroke-width="2.5"/>
+                        <path d="M10 28 Q20 36 30 28" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+                        <line x1="20" y1="21" x2="20" y2="30" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+                        <line x1="20" y1="24" x2="14" y2="28" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+                        <line x1="20" y1="24" x2="26" y2="28" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                    <div>
+                        <h1>Assistant Medical</h1>
+                        <span class="header-badge">IA Active</span>
+                    </div>
+                </div>
+                <button class="header-btn" onclick="showPage('page-profile')">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#fff" stroke-width="2">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M4 20c0-4 4-7 8-7s8 3 8 7"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <main class="page-content">
+            <!-- Section Bienvenue -->
+            <section class="welcome-card">
+                <div class="welcome-text">
+                    <h2>Bonjour ! Comment allez-vous ?</h2>
+                    <p>Je suis votre assistant medical intelligent. Selectionnez une option pour commencer votre evaluation.</p>
+                </div>
+            </section>
+
+            <!-- Cartes d'action principales -->
+            <section class="action-grid">
+                <div class="action-card" onclick="showPage('page-symptoms')">
+                    <div class="action-icon action-icon-blue">
+                        <svg viewBox="0 0 48 48" width="48" height="48">
+                            <circle cx="24" cy="24" r="20" fill="none" stroke="#0077B6" stroke-width="2"/>
+                            <path d="M24 12v12l8 6" fill="none" stroke="#0077B6" stroke-width="2.5" stroke-linecap="round"/>
+                            <circle cx="24" cy="24" r="2" fill="#0077B6"/>
+                        </svg>
+                    </div>
+                    <h3>Evaluer Symptomes</h3>
+                    <p>Decrivez vos symptomes et recevez une analyse IA</p>
+                </div>
+
+                <div class="action-card" onclick="showPage('page-camera')">
+                    <div class="action-icon action-icon-green">
+                        <svg viewBox="0 0 48 48" width="48" height="48">
+                            <rect x="6" y="12" width="36" height="24" rx="4" fill="none" stroke="#00B4D8" stroke-width="2"/>
+                            <circle cx="24" cy="24" r="8" fill="none" stroke="#00B4D8" stroke-width="2"/>
+                            <circle cx="24" cy="24" r="3" fill="#00B4D8"/>
+                            <rect x="20" y="8" width="8" height="4" rx="2" fill="none" stroke="#00B4D8" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>Scanner Camera</h3>
+                    <p>Utilisez la camera pour une analyse visuelle</p>
+                </div>
+
+                <div class="action-card" onclick="showPage('page-history')">
+                    <div class="action-icon action-icon-purple">
+                        <svg viewBox="0 0 48 48" width="48" height="48">
+                            <rect x="8" y="6" width="32" height="36" rx="3" fill="none" stroke="#7B2CBF" stroke-width="2"/>
+                            <line x1="14" y1="14" x2="34" y2="14" stroke="#7B2CBF" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="14" y1="20" x2="34" y2="20" stroke="#7B2CBF" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="14" y1="26" x2="28" y2="26" stroke="#7B2CBF" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="32" cy="34" r="6" fill="none" stroke="#7B2CBF" stroke-width="2"/>
+                            <path d="M30 34l1.5 1.5 2.5-3" fill="none" stroke="#7B2CBF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Historique</h3>
+                    <p>Consultez vos analyses et evaluations passees</p>
+                </div>
+
+                <div class="action-card" onclick="showPage('page-info')">
+                    <div class="action-icon action-icon-orange">
+                        <svg viewBox="0 0 48 48" width="48" height="48">
+                            <circle cx="24" cy="24" r="18" fill="none" stroke="#E76F51" stroke-width="2"/>
+                            <line x1="24" y1="22" x2="24" y2="34" stroke="#E76F51" stroke-width="2.5" stroke-linecap="round"/>
+                            <circle cx="24" cy="16" r="2" fill="#E76F51"/>
+                        </svg>
+                    </div>
+                    <h3>Informations</h3>
+                    <p>Conseils sante et informations medicales</p>
+                </div>
+            </section>
+
+            <!-- Avertissement medical -->
+            <section class="disclaimer-card">
+                <div class="disclaimer-icon">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#E76F51" stroke-width="2">
+                        <path d="M12 2L2 20h20L12 2z"/>
+                        <line x1="12" y1="9" x2="12" y2="14"/>
+                        <circle cx="12" cy="17" r="0.5" fill="#E76F51"/>
+                    </svg>
+                </div>
+                <div class="disclaimer-text">
+                    <strong>Avertissement :</strong> Cette application ne remplace pas une consultation medicale. En cas d'urgence, appelez le 15 (SAMU) ou le 112.
+                </div>
+            </section>
+        </main>
+
+        <!-- Barre de navigation inferieure -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" onclick="showPage('page-home')" data-page="page-home">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12l9-9 9 9"/><path d="M5 10v10h5v-6h4v6h5V10"/>
+                </svg>
+                <span>Accueil</span>
+            </button>
+            <button class="nav-item" onclick="showPage('page-symptoms')" data-page="page-symptoms">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+                </svg>
+                <span>Symptomes</span>
+            </button>
+            <button class="nav-item nav-item-center" onclick="showPage('page-camera')" data-page="page-camera">
+                <div class="nav-center-btn">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#fff" stroke-width="2">
+                        <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/>
+                    </svg>
+                </div>
+                <span>Scanner</span>
+            </button>
+            <button class="nav-item" onclick="showPage('page-history')" data-page="page-history">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <span>Historique</span>
+            </button>
+            <button class="nav-item" onclick="showPage('page-info')" data-page="page-info">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                </svg>
+                <span>Info</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- ===== PAGE EVALUATION DES SYMPTOMES ===== -->
+    <div id="page-symptoms" class="page">
+        <header class="app-header">
+            <div class="header-content">
+                <button class="header-btn" onclick="showPage('page-home')">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#fff" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"/>
+                    </svg>
+                </button>
+                <h1 class="header-title">Evaluer Symptomes</h1>
+                <div style="width:40px;"></div>
+            </div>
+        </header>
+
+        <main class="page-content">
+            <!-- Etape 1 : Informations patient -->
+            <section class="section-card" id="step-patient">
+                <div class="step-indicator">
+                    <div class="step active">1</div>
+                    <div class="step-line"></div>
+                    <div class="step">2</div>
+                    <div class="step-line"></div>
+                    <div class="step">3</div>
+                </div>
+                <h2 class="section-title">Informations du Patient</h2>
+                <div class="form-group">
+                    <label for="patient-age">Age</label>
+                    <input type="number" id="patient-age" placeholder="Entrez votre age" min="0" max="120" value="">
+                </div>
+                <div class="form-group">
+                    <label>Sexe</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="sexe" value="homme">
+                            <span class="radio-custom"></span>
+                            Homme
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="sexe" value="femme">
+                            <span class="radio-custom"></span>
+                            Femme
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="patient-conditions">Conditions pre-existantes</label>
+                    <select id="patient-conditions">
+                        <option value="aucune">Aucune</option>
+                        <option value="diabete">Diabete</option>
+                        <option value="hypertension">Hypertension</option>
+                        <option value="asthme">Asthme</option>
+                        <option value="cardiaque">Maladie cardiaque</option>
+                        <option value="allergies">Allergies</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary btn-block" onclick="goToStep(2)">
+                    Suivant <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+            </section>
+
+            <!-- Etape 2 : Selection des symptomes -->
+            <section class="section-card hidden" id="step-symptoms">
+                <div class="step-indicator">
+                    <div class="step completed">1</div>
+                    <div class="step-line completed"></div>
+                    <div class="step active">2</div>
+                    <div class="step-line"></div>
+                    <div class="step">3</div>
+                </div>
+                <h2 class="section-title">Selectionnez vos Symptomes</h2>
+                <p class="section-desc">Cochez tous les symptomes que vous ressentez actuellement.</p>
+
+                <div class="category-label">Tete & Cou</div>
+                <div class="symptoms-grid">
+                    <label class="symptom-chip">
+                        <input type="checkbox" name="symptom" value="mal_de_tete">
+                        <span class="chip-custom"></span>
+                        <span class="chip-text">Mal de tete</span>
+                    </label>
+                    <label class="symptom-chip">
+                        <input type="checkbox" name="symptom" value="vertige">
+                        <span class="chip-custom"></span>
+                        <span class="chip-text">Vertige</span>
+                    </label>
+                    <label class="symptom-chip">
+                        <input type="checkbox" name="symptom" value="gorge_irritee">
+                        <span class="chip-custom"></span>
+                        <span class="chip-text">Gorge irritee</span>
+                    </label>
+                    <label class="symptom-chip">
+                        <input type="checkbox" name="symptom" value="congestion_nasale">
+                        <span class="chip-custom"></span>
+                        <span class="chip-text">Congestion nasale</span>
+                    </label>
+                    <label class="symptom-chip">
+                        <input type="checkbox" name="symptom" value="yeux_rouges">
+                        <span class="chip-custom"></span>
+                        <span class="chip-text">Yeux rouges</span>
+                    </label>
+                    <label class="symptom-chip">
+                        <input type="checkbox" name="symptom" value="douleur_oreille">
+                        <span class="chip-custom"></span>
+                        <span class="chip-text">Douleur oreille</span>
+                    </label>
+                </div>
+
+                <div class="category-label">Corps & Muscles</div>
+                <div class="symptoms-grid">
+                    <label class="symptom-chip">
+                        <input type="checkbox" name="symptom" value="fievre">
+                        <span class="chip-custom"></span>
+                        <span class="chip-text">Fievre</span>
+                    </label>
+                    <label class="symptom-chip">
+                        <input type="checkbox" name="symptom" value="frissons">
+                        <span class="chip-custom"></span>
+                        <span class="chip-text">Frissons</span>
+                    </label>
+                    <label class="symptom-chip">
+                        <input type="checkbox" name="symptom" value="fatigue">
+                        <span class="chip-custom"></span>
+                        <span class="chip-text">Fatigue</span>
+                    </label>
+                    <label class="symptom-chip">
+                        <input type="checkbox" name="symptom" value="douleurs_musculaires">
+                        <span class="chip-custom"></span>
+                        <span class="chip-text">Douleurs musculaires</span>
+                    </label>
+                    <label class="symptom-chip">
+                        <input type="checkbox" name="symptom" value="douleurs_articulaires">
+                        <span class="chip-custom"></span>
+                        <span class="chip-text">Douleurs articulaires</span>
+                    </label>
+                    <label class="symptom-chip">
+                        <input type="checkbox" name="symptom" value="nausee">
+                        <span class="chip-custom"></span>
+                        <span class="chip-text">Nausee / Vomissements</span>
+                    </label>
+                </div>
+
+                <div class="category-label">Respiration</div>
+                <div class="symptoms-grid">
+                    <label class="symptom-chip">
+                        <input type="checkbox" name="symptom" value="toux">
+                        <span class="chip-custom"></span>
+                        <span class="chip-text">Toux</span>
+                    </label>
+                    <label class="symptom-chip">
+                        <input type="checkbox" name="symptom" value="essoufflement">
+                        <span class="chip-custom"></span>
+                        <span class="chip-text">Essoufflement</span>
+                    </label>
+                    <label class="symptom-chip">
+                        <input type="checkbox" name="symptom" value="difficulte_respirer">
+                        <span class="chip-custom"></span>
+                        <span class="chip-text">Difficulte a respirer</span>
+                    </label>
+                    <label class="symptom-chip">
+                        <input type="checkbox" name="symptom" value="douleur_poumon">
+                        <span class="chip-custom"></span>
+                        <span class="chip-text">Douleur thoracique</span>
+                    </label>
+                </div>
+
+                <div class="category-label">Digestion & Peau</div>
+                <div class="symptoms-grid">
+                    <label class="symptom-chip">
+                        <input type="checkbox" name="symptom" value="diarrhee">
+                        <span class="chip-custom"></span>
+                        <span class="chip-text">Diarrhee</span>
+                    </label>
+                    <label class="symptom-chip">
+                        <input type="checkbox" name="symptom" value="douleur_abdominale">
+                        <span class="chip-custom"></span>
+                        <span class="chip-text">Douleur abdominale</span>
+                    </label>
+                    <label class="symptom-chip">
+                        <input type="checkbox" name="symptom" value="eruption_cutanee">
+                        <span class="chip-custom"></span>
+                        <span class="chip-text">Eruption cutanee</span>
+                    </label>
+                    <label class="symptom-chip">
+                        <input type="checkbox" name="symptom" value="démangeaisons">
+                        <span class="chip-custom"></span>
+                        <span class="chip-text">Demangeaisons</span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="symptom-duration">Depuis combien de temps ?</label>
+                    <select id="symptom-duration">
+                        <option value="moins_24h">Moins de 24 heures</option>
+                        <option value="1_3_jours">1 a 3 jours</option>
+                        <option value="3_7_jours">3 a 7 jours</option>
+                        <option value="plus_7_jours">Plus de 7 jours</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="symptom-notes">Notes supplementaires</label>
+                    <textarea id="symptom-notes" rows="3" placeholder="Decrivez vos symptomes en detail..."></textarea>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-secondary" onclick="goToStep(1)">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                        Retour
+                    </button>
+                    <button class="btn btn-primary" onclick="analyzeSymptoms()">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        Analyser avec IA
+                    </button>
+                </div>
+            </section>
+
+            <!-- Etape 3 : Resultats de l'analyse -->
+            <section class="section-card hidden" id="step-results">
+                <div class="step-indicator">
+                    <div class="step completed">1</div>
+                    <div class="step-line completed"></div>
+                    <div class="step completed">2</div>
+                    <div class="step-line completed"></div>
+                    <div class="step active">3</div>
+                </div>
+                <h2 class="section-title">Resultats de l'Analyse IA</h2>
+
+                <div id="analysis-loading" class="analysis-loading hidden">
+                    <div class="spinner"></div>
+                    <p>Analyse en cours par l'IA...</p>
+                </div>
+
+                <div id="analysis-results" class="analysis-results hidden">
+                    <div id="urgency-banner" class="urgency-banner"></div>
+
+                    <div class="result-card">
+                        <h3>Diagnostic probable</h3>
+                        <div id="diagnosis-list"></div>
+                    </div>
+
+                    <div class="result-card">
+                        <h3>Confiance de l'analyse</h3>
+                        <div id="confidence-bars"></div>
+                    </div>
+
+                    <div class="result-card">
+                        <h3>Recommandations</h3>
+                        <div id="recommendations-list"></div>
+                    </div>
+
+                    <div class="result-card result-card-warning">
+                        <h3>Quand consulter un medecin</h3>
+                        <div id="when-consult"></div>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-secondary" onclick="goToStep(2)">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                        Modifier
+                    </button>
+                    <button class="btn btn-primary" onclick="showPage('page-home')">
+                        Terminer
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <nav class="bottom-nav">
+            <button class="nav-item" onclick="showPage('page-home')" data-page="page-home">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>
+                <span>Accueil</span>
+            </button>
+            <button class="nav-item active" onclick="showPage('page-symptoms')" data-page="page-symptoms">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                <span>Symptomes</span>
+            </button>
+            <button class="nav-item nav-item-center" onclick="showPage('page-camera')" data-page="page-camera">
+                <div class="nav-center-btn">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#fff" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                </div>
+                <span>Scanner</span>
+            </button>
+            <button class="nav-item" onclick="showPage('page-history')" data-page="page-history">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>Historique</span>
+            </button>
+            <button class="nav-item" onclick="showPage('page-info')" data-page="page-info">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                <span>Info</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- ===== PAGE CAMERA / SCANNER ===== -->
+    <div id="page-camera" class="page">
+        <header class="app-header">
+            <div class="header-content">
+                <button class="header-btn" onclick="showPage('page-home')">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#fff" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <h1 class="header-title">Scanner Camera</h1>
+                <div style="width:40px;"></div>
+            </div>
+        </header>
+
+        <main class="page-content">
+            <section class="section-card">
+                <h2 class="section-title">Analyse Visuelle par IA</h2>
+                <p class="section-desc">Prenez une photo de la zone a analyser (peau, yeux, gorge, etc.) pour obtenir une evaluation par intelligence artificielle.</p>
+
+                <div class="camera-preview-container">
+                    <img id="camera-preview" class="camera-preview" src="" alt="Apercu de la photo">
+                    <div id="camera-placeholder" class="camera-placeholder">
+                        <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="#90E0EF" stroke-width="1.5">
+                            <rect x="8" y="16" width="48" height="32" rx="4"/>
+                            <circle cx="32" cy="32" r="10"/>
+                            <circle cx="32" cy="32" r="4"/>
+                            <rect x="26" y="10" width="12" height="6" rx="3"/>
+                        </svg>
+                        <p>Aucune photo prise</p>
+                        <p class="camera-hint">Utilisez le bouton ci-dessous pour capturer une image</p>
+                    </div>
+                </div>
+
+                <div class="camera-options">
+                    <label class="form-group">
+                        <label>Zone du corps a analyser</label>
+                        <select id="body-zone">
+                            <option value="peau">Peau (eruption, bouton, blessure)</option>
+                            <option value="yeux">Yeux (rougeur, irritation)</option>
+                            <option value="gorge">Gorge (rougeur, amygdales)</option>
+                            <option value="langue">Langue (aspect, couleur)</option>
+                            <option value="ongles">Ongles (couleur, texture)</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="btn-group-vertical">
+                    <button class="btn btn-primary btn-block" onclick="capturePhoto('camera')">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                        Prendre une photo
+                    </button>
+                    <button class="btn btn-secondary btn-block" onclick="capturePhoto('gallery')">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        Choisir depuis la galerie
+                    </button>
+                    <button class="btn btn-accent btn-block" id="btn-analyze-photo" onclick="analyzePhoto()" disabled>
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                        Lancer l'analyse IA
+                    </button>
+                </div>
+            </section>
+
+            <section class="section-card hidden" id="photo-analysis-results">
+                <h2 class="section-title">Resultats de l'Analyse Visuelle</h2>
+                <div id="photo-analysis-content"></div>
+            </section>
+        </main>
+
+        <nav class="bottom-nav">
+            <button class="nav-item" onclick="showPage('page-home')" data-page="page-home">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>
+                <span>Accueil</span>
+            </button>
+            <button class="nav-item" onclick="showPage('page-symptoms')" data-page="page-symptoms">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                <span>Symptomes</span>
+            </button>
+            <button class="nav-item nav-item-center active" onclick="showPage('page-camera')" data-page="page-camera">
+                <div class="nav-center-btn">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#fff" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                </div>
+                <span>Scanner</span>
+            </button>
+            <button class="nav-item" onclick="showPage('page-history')" data-page="page-history">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>Historique</span>
+            </button>
+            <button class="nav-item" onclick="showPage('page-info')" data-page="page-info">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                <span>Info</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- ===== PAGE HISTORIQUE ===== -->
+    <div id="page-history" class="page">
+        <header class="app-header">
+            <div class="header-content">
+                <button class="header-btn" onclick="showPage('page-home')">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#fff" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <h1 class="header-title">Historique</h1>
+                <button class="header-btn" onclick="clearHistory()">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+                </button>
+            </div>
+        </header>
+
+        <main class="page-content">
+            <section class="section-card">
+                <h2 class="section-title">Vos Analyses Precedentes</h2>
+                <div id="history-list">
+                    <div class="empty-state">
+                        <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="#CAF0F8" stroke-width="1.5">
+                            <circle cx="32" cy="32" r="28"/>
+                            <line x1="32" y1="16" x2="32" y2="36"/><circle cx="32" cy="42" r="2" fill="#CAF0F8"/>
+                        </svg>
+                        <p>Aucune analyse dans l'historique</p>
+                        <p class="empty-hint">Vos analyses de symptomes et de photos apparaitront ici.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <nav class="bottom-nav">
+            <button class="nav-item" onclick="showPage('page-home')" data-page="page-home">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>
+                <span>Accueil</span>
+            </button>
+            <button class="nav-item" onclick="showPage('page-symptoms')" data-page="page-symptoms">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                <span>Symptomes</span>
+            </button>
+            <button class="nav-item nav-item-center" onclick="showPage('page-camera')" data-page="page-camera">
+                <div class="nav-center-btn">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#fff" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                </div>
+                <span>Scanner</span>
+            </button>
+            <button class="nav-item active" onclick="showPage('page-history')" data-page="page-history">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>Historique</span>
+            </button>
+            <button class="nav-item" onclick="showPage('page-info')" data-page="page-info">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                <span>Info</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- ===== PAGE INFORMATIONS ===== -->
+    <div id="page-info" class="page">
+        <header class="app-header">
+            <div class="header-content">
+                <button class="header-btn" onclick="showPage('page-home')">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#fff" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <h1 class="header-title">Informations Sante</h1>
+                <div style="width:40px;"></div>
+            </div>
+        </header>
+
+        <main class="page-content">
+            <section class="section-card">
+                <h2 class="section-title">Conseils de Sante</h2>
+
+                <div class="info-card">
+                    <div class="info-icon info-icon-blue">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    </div>
+                    <div class="info-content">
+                        <h3>Gestes de Premier Secours</h3>
+                        <p>Appelez le 15 (SAMU) ou le 112 en cas d'urgence medicale. Pour une hemorragie, appuyez fermement sur la blessure avec un tissu propre. En cas de perte de connaissance, placez la personne en position laterale de securite (PLS).</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon info-icon-green">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+                    </div>
+                    <div class="info-content">
+                        <h3>Prevention Quotidienne</h3>
+                        <p>Lavez-vous les mains regulierement pendant 20 secondes. Maintenez une hydratation suffisante (1,5 a 2 litres d'eau par jour). Dormez 7 a 9 heures par nuit et pratiquez au moins 30 minutes d'activite physique par jour.</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon info-icon-purple">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <div class="info-content">
+                        <h3>Signaux d'Alerte</h3>
+                        <p>Consultez immediatement un medecin si vous presentez : douleur thoracique intense, difficulte respiratoire severe, confusion soudaine, paralysie d'un cote du corps, saignement incontrolable, ou temperature superieure a 39C chez un enfant.</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon info-icon-orange">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    </div>
+                    <div class="info-content">
+                        <h3>A Propos de l'Application</h3>
+                        <p>Assistant Medical IA est une application educative utilisant le framework Apache Cordova. Les analyses fournies sont des estimations basees sur des algorithmes simples et ne remplacent en aucun cas un avis medical professionnel. Version 1.0.0 - 2025</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-card">
+                <h2 class="section-title">Numeros d'Urgence</h2>
+                <div class="emergency-grid">
+                    <div class="emergency-item">
+                        <span class="emergency-number">15</span>
+                        <span class="emergency-label">SAMU</span>
+                    </div>
+                    <div class="emergency-item">
+                        <span class="emergency-number">112</span>
+                        <span class="emergency-label">Urgences Europe</span>
+                    </div>
+                    <div class="emergency-item">
+                        <span class="emergency-number">18</span>
+                        <span class="emergency-label">Pompiers</span>
+                    </div>
+                    <div class="emergency-item">
+                        <span class="emergency-number">114</span>
+                        <span class="emergency-label">SMS Urgence</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <nav class="bottom-nav">
+            <button class="nav-item" onclick="showPage('page-home')" data-page="page-home">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>
+                <span>Accueil</span>
+            </button>
+            <button class="nav-item" onclick="showPage('page-symptoms')" data-page="page-symptoms">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                <span>Symptomes</span>
+            </button>
+            <button class="nav-item nav-item-center" onclick="showPage('page-camera')" data-page="page-camera">
+                <div class="nav-center-btn">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#fff" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                </div>
+                <span>Scanner</span>
+            </button>
+            <button class="nav-item" onclick="showPage('page-history')" data-page="page-history">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>Historique</span>
+            </button>
+            <button class="nav-item active" onclick="showPage('page-info')" data-page="page-info">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                <span>Info</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- ===== PAGE PROFIL ===== -->
+    <div id="page-profile" class="page">
+        <header class="app-header">
+            <div class="header-content">
+                <button class="header-btn" onclick="showPage('page-home')">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#fff" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <h1 class="header-title">Profil</h1>
+                <div style="width:40px;"></div>
+            </div>
+        </header>
+        <main class="page-content">
+            <section class="section-card">
+                <div class="profile-avatar">
+                    <svg viewBox="0 0 64 64" width="80" height="80" fill="none" stroke="#90E0EF" stroke-width="2">
+                        <circle cx="32" cy="22" r="12"/><path d="M10 56c0-12 10-20 22-20s22 8 22 20"/>
+                    </svg>
+                </div>
+                <h2 class="profile-name" id="profile-name">Utilisateur</h2>
+                <p class="profile-subtitle" id="profile-subtitle">Application Assistant Medical IA</p>
+            </section>
+            <section class="section-card">
+                <h2 class="section-title">Statistiques</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number" id="stat-total">0</span>
+                        <span class="stat-label">Analyses</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="stat-symptom">0</span>
+                        <span class="stat-label">Symptomes</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="stat-photo">0</span>
+                        <span class="stat-label">Photos</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
